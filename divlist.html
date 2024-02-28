@@ -1,91 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<title>Divlist File</title>
-	<style>
-		.flex-container {
-			display: flex;
-			flex-direction: row;
-			background-color: red;
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divlist File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
-		.flex-container>div {
-			background-color: #f1f1f1;
-			margin: 10px;
-			padding: 20px;
-			font-size: 30px;
-		}
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
 
-		@media (max-width: 600px) {
-			.flex-container {
-				flex-direction: column;
-				background-color: green;
-			}
-		}
-	</style>
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            background-color: #3498db;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .flex-container>div {
+            background-color: #ecf0f1;
+            margin: 10px;
+            padding: 20px;
+            font-size: 20px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        @media (max-width: 600px) {
+            .flex-container {
+                flex-direction: column;
+                background-color: #3498db;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-	<div class="container">
-		<h2>Bharath Simha reddy Kothapeta builds a list with divs</h2>
-		<input type="text" id="text">
-		<button onclick="makeNewDiv()">Add end</button>
-		<button onclick="addFront()">Add front</button>
-		<button onclick="remove()">Remove</button>
-		<button onclick="swapElements()">Swap</button>
-		<div class="flex-container" id="target">
-			<div class="divlist">First item</div>
-			<div class="divlist">Second item</div>
-			<div class="divlist">Third item</div>
-		</div>
-	</div>
+    <div class="container">
+        <h2>Bharath Simha reddy Kothapeta builds a list with divs</h2>
+        <input type="text" id="text">
+        <button onclick="makeNewDiv()">Add end</button>
+        <button onclick="addFront()">Add front</button>
+        <button onclick="remove()">Remove</button>
+        <button onclick="swapElements()">Swap</button>
+        <div class="flex-container" id="target">
+            <div class="divlist">First item</div>
+            <div class="divlist">Second item</div>
+            <div class="divlist">Third item</div>
+        </div>
+    </div>
 
-	<script>
-		function makeNewDiv() {
-			let element = document.createElement("div")
-			element.innerHTML = document.getElementById('text').value
-			element.style.color = "orange"
-			let container = document.getElementById('target')
-			element.setAttribute("class", " divlist")
-			container.appendChild(element)
-		}
+    <script>
+        function makeNewDiv() {
+            let element = document.createElement("div")
+            element.innerHTML = document.getElementById('text').value
+            element.style.color = "orange"
+            let container = document.getElementById('target')
+            element.setAttribute("class", " divlist")
+            container.appendChild(element)
+        }
 
-		function remove() {
-			let divListItems = document.getElementsByClassName('divlist');
-			let length = divListItems.length;
-			if (length > 0) {
-				let middleItem = Math.floor(length / 2);
-				divListItems[middleItem].remove();
-			}
-		}
+        function remove() {
+            let divListItems = document.getElementsByClassName('divlist');
+            let length = divListItems.length;
+            if (length > 0) {
+                let middleItem = Math.floor(length / 2);
+                divListItems[middleItem].remove();
+            }
+        }
 
-		function addFront() {
-			let element = document.createElement("div")
-			element.innerHTML = document.getElementById('text').value
-			element.style.color = "orange"
-			let container = document.getElementById('target')
-			element.setAttribute("class", " divlist")
-			container.insertBefore(element, container.firstChild);
-		}
+        function addFront() {
+            let element = document.createElement("div")
+            element.innerHTML = document.getElementById('text').value
+            element.style.color = "orange"
+            let container = document.getElementById('target')
+            element.setAttribute("class", " divlist")
+            container.insertBefore(element, container.firstChild);
+        }
 
-		function swapElements() {
-			let divListItems = document.getElementsByClassName('divlist');
-			let length = divListItems.length;
+        function swapElements() {
+            let divListItems = document.getElementsByClassName('divlist');
+            let length = divListItems.length;
 
-			if (length >= 2) {
-				let index1 = Math.floor(Math.random() * length);
-				let index2 = Math.floor(Math.random() * (length - 1));
-				index2 = (index2 >= index1) ? index2 + 1 : index2;
+            if (length >= 2) {
+                let index1 = Math.floor(Math.random() * length);
+                let index2 = Math.floor(Math.random() * (length - 1));
+                index2 = (index2 >= index1) ? index2 + 1 : index2;
 
-				let temp = divListItems[index1].cloneNode(true);
-				divListItems[index1].replaceWith(divListItems[index2].cloneNode(true));
-				divListItems[index2].replaceWith(temp);
-			}
-		}
-	</script>
-
+                let temp = divListItems[index1].cloneNode(true);
+                divListItems[index1].replaceWith(divListItems[index2].cloneNode(true));
+                divListItems[index2].replaceWith(temp);
+            }
+        }
+    </script>
 </body>
-
 </html>
